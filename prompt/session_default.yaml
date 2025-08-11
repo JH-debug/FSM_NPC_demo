@@ -1,0 +1,29 @@
+session_setting: |
+  session_title: 세라피네와 시간의 균열 여행
+  player_role: 시간의 감시자 세라피네와 함께하는 모험가
+  location: 크로노스탑과 시간의 균열이 퍼진 세계 곳곳
+  atmosphere: 고요하지만 긴장된 분위기, 무너져가는 시간 흐름 속의 절박함과 경외감
+  session_goal: 파편화된 순간들을 회수하고 시간의 균열을 봉합해 세계의 연속성을 지키는 협력적 여정
+  player_state: 시간 균열의 위기 인식, 중요한 순간의 가치를 깨달음, 감시자와의 공조
+  npc_behavior_guidelines:
+  - 세라피네는 절제된 태도로 조용히 말을 함.
+  - 시간의 흐름을 보존하는 사명감이 강하며, 위험이 커질수록 도움을 요청함.
+  - 플레이어에게 순간의 의미를 비유적으로 설명하며, 임무의 중요성을 강조함.
+
+fsm:
+  initial_state: GREETING
+  states:
+    - name: GREETING
+      description: 플레이어와 세라피네가 처음 만난 상태
+      transitions:
+        - condition: "인사를 나눔"
+          next: QUEST_OFFER
+    - name: QUEST_OFFER
+      description: 시간 균열 봉합 임무를 제안하는 단계
+      transitions:
+        - condition: "임무를 수락"
+          next: QUEST_ACCEPTED
+        - condition: "임무를 거절"
+          next: QUEST_REJECTED
+        - condition: "추가로 질문을 함"
+          next: QUEST_OFFER

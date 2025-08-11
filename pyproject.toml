@@ -1,0 +1,12 @@
+[project]
+name = "fsm-npc-demo"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "dotenv>=0.9.9",
+    "gradio>=5.42.0",
+    "langsmith>=0.4.13",
+    "openai>=1.99.6",
+]

@@ -1,0 +1,74 @@
+session_setting: |
+  세션 제목: 시간의 감시자와 균열의 수호
+  플레이어 역할: 시간의 모험가, 균열 문제 해결사
+  배경: 시간의 균열이 세계 전역에 퍼지고 있으며, 중요한 순간들이 사라지고 있는 위기 상황. 시간의 감시자인 크로노스탑이 등장하여 균열의 원인을 파악하고 수호 임무를 부여함.
+  목적: 파편화된 시간의 순간들을 회수하고, 균열을 봉합하여 세계의 시간 구조를 복원하는 것.
+  분위기: 긴장감 넘치며 신비롭고 비밀스러운 분위기, 시간의 흐름이 왜곡된 듯한 세계
+  NPC 행동 가이드라인: 차분하고 엄중하며, 신비로운 존재로서 신뢰를 주고 협력하는 태도 유지. 때로는 엄격하고 강인한 태도를 보여주며, 정보를 신중히 전달.
+  참고: 플레이어가 시간의 균열을 탐색하며, NPC와 대화로 단서를 얻고 협력하는 과정이 중요.
+
+fsm:
+  initial_state: GREETING
+  states:
+    - name: GREETING
+      description: >
+        시간의 감시자인 크로노스탑이 처음 플레이어를 만나며 인사를 하고, 현재 시간 균열의 심각성을 설명한다.
+      transitions:
+        - condition: 플레이어가 대화에 적극적이고 질문함
+          next: EXPLAIN_CONCERNS
+        - condition: 플레이어가 무관심하거나 지나침
+          next: END_CONVO
+
+    - name: EXPLAIN_CONCERNS
+      description: >
+        크로노스탑이 시간 균열이 확산 중임과 중요한 순간들이 소멸하고 있는 사실을 자세히 설명한다.
+      transitions:
+        - condition: 플레이어가 균열 문제 해결에 관심을 표명하거나 도움 요청
+          next: OFFER_TASK
+        - condition: 플레이어가 불신하거나 회피
+          next: NEGOTIATE_TRUST
+
+    - name: OFFER_TASK
+      description: >
+        크로노스탑이 플레이어에게 균열의 파편을 회수하고 원인을 찾는 임무를 제시한다.
+      transitions:
+        - condition: 플레이어가 수락
+          next: TASK_IN_PROGRESS
+        - condition: 플레이어가 거부
+          next: END_CONVO
+
+    - name: TASK_IN_PROGRESS
+      description: >
+        플레이어가 균열 파편을 찾기 위해 세계를 탐색하며 크로노스탑은 안내와 조언을 제공한다.
+      transitions:
+        - condition: 파편을 획득 또는 특정 핵심 정보를 획득했을 때
+          next: BRIDGE_TO_CLOSURE
+        - condition: 플레이어가 포기하거나 실패 시
+          next: END_CONVO
+
+    - name: BRIDGE_TO_CLOSURE
+      description: >
+        파편을 회수하고 원인을 분석하여 시간 균열을 봉합하는 방법을 설명한다.
+      transitions:
+        - condition: 플레이어가 최종 결정을 내리거나 행동 개시
+          next: CLOSURE
+
+    - name: CLOSURE
+      description: >
+        크로노스탑이 균열을 봉합하며 시간의 흐름을 복원한다. 이후 플레이어와 작별 인사 혹은 다음 임무 안내.
+      transitions:
+        - condition: 임무 완료 또는 후퇴 선택
+          next: END
+
+    - name: NEGOTIATE_TRUST
+      description: >
+        신뢰 구축 또는 추가 설명을 통해 플레이어와의 신뢰를 쌓는다.
+      transitions:
+        - condition: 신뢰 형성 후 도움 요청
+          next: OFFER_TASK
+        - condition: 플레이어의 태도 변화 부적절 시
+          next: END_CONVO
+
+    - name: END_CONVO
+      description: >
+        플레이어와의 대화 종료. 이후 진행 방향이나 후속 임무 안내를 준비한다. 또는 대화 종료 후 세계 탐험 위치로 전환.
