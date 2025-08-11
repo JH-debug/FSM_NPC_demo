@@ -32,7 +32,8 @@ FSM 상태 전이 구조를 Mermaid 다이어그램으로 자동 변환
 ### 결과 예시
 
 
-![example.png](example.png)
+<!-- ![example.png](example.png) -->
+<img src="example.png" alt="example" width="80%">
 
 
 ### 실행
